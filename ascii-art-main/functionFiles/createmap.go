@@ -11,8 +11,8 @@ import (
 func CreateMap(fileName string) (map[rune][]string, error) {
 	// Open and read a file specified by the given file path(s), creating an ASCII art map.
 	// Check if the file exists
-	//file
-	file, err := os.Open(fileName)
+	fileString := fileName + ".txt"
+	file, err := os.Open(fileString)
 	if err != nil {
 		if os.IsNotExist(err) {
 			fmt.Println("File does not exist:", fileName)
@@ -22,14 +22,6 @@ func CreateMap(fileName string) (map[rune][]string, error) {
 		return nil, err
 	}
 	defer file.Close()
-	// Check for empty file
-	stat, err := file.Stat()
-	if err != nil {
-		return nil, err
-	}
-	if stat.Size() == 0 {
-		return nil, fmt.Errorf("error: Character map file '%s' is empty", fileName)
-	}
 	scanner := bufio.NewScanner(file)
 	lines := []string{}
 	for scanner.Scan() {
