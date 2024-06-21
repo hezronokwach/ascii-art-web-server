@@ -11,6 +11,7 @@ import (
 func CreateMap(fileName string) (map[rune][]string, error) {
 	// Open and read a file specified by the given file path(s), creating an ASCII art map.
 	// Check if the file exists
+	//file
 	file, err := os.Open(fileName)
 	if err != nil {
 		if os.IsNotExist(err) {

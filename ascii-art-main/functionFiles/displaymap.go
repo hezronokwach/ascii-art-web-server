@@ -13,7 +13,7 @@ func DisplayAsciiArt(characterMap map[rune][]string, input string) {
 	}
 	// Split the input string by "\n" to handle newline characters.
 	inputSlice := strings.Split(input, "\\n")
-	count := 0
+	//count := 0
 	// Iterate through the split input segments.
 	// If the segment is empty (indicating a newline), it prints a newline character, ensuring proper formatting.
 	/* If the segment contains characters:
@@ -21,13 +21,7 @@ func DisplayAsciiArt(characterMap map[rune][]string, input string) {
        Retrieves the corresponding ASCII art lines for the character from the character map.
        Prints each line of ASCII art for the character.
        If the character is not found in the map, it prints an error message and returns.*/
-	for _, value := range inputSlice {
-		if value == "" {
-			count++
-			if count < len(inputSlice) {
-				fmt.Println()
-			}
-		} else {
+	for _, value := range inputSlice {	
 			for i := 0; i < 8; i++ {
 				for _, char := range value {
 					line, ok := characterMap[char]
@@ -40,6 +34,6 @@ func DisplayAsciiArt(characterMap map[rune][]string, input string) {
 				}
 				fmt.Println()
 			}
-		}
+		
 	}
 }
