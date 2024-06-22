@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Go lang</title>
+    </head>
+    <body>
+        <h2 style="text-align: center;">ASCII ART</h2>
+        <form method="POST" action="/submit">
+            <textarea  name="userinput" placeholder="Enter string" rows="10"
+                cols="40" ></textarea><br>
+            <select name="bannerfile">
+                <option value="standard">standard</option>
+                <option value="shadow">shadow</option>
+                <option value="thinkertoy">thinkertoy</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        {{if .Success}}
+        <h1>Output</h1>
+        <h3>Processed ASCII Art:</h3>
+        <pre>{{.Result}}</pre>
+        {{end}}
+    </body>
+</html>
