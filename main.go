@@ -2,24 +2,18 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
-	asciiart "asciiart/functionFiles"
+	handlers "asciiart/handlers"
 )
 
 func main() {
-	// Check if command-line arguments are appropriate, providing usage instructions if not.
-	
-	// Read the ASCII art map from the specified file.
-	characterMap, err := asciiart.CreateMap(filePath)
+	http.HandleFunc("/", handlers.Request)
+	fmt.Println("Server is starting on http://localhost:8080")
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		fmt.Println("Error reading map:", err)
-		return
+		fmt.Println("Error starting server")
+		os.Exit(1)
 	}
-	// Display ASCII art corresponding to the input string using the provided map
-	if len(characterMap) == 0 {
-		fmt.Println("File is empty")
-		return
-	}
-	asciiart.DisplayAsciiArt(characterMap, input)
 }
