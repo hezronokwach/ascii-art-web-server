@@ -11,7 +11,7 @@ import (
 func CreateMap(fileName string) (map[rune][]string, error) {
 	// Open and read a file specified by the given file path(s), creating an ASCII art map.
 	// Check if the file exists
-	fileString := fileName + ".txt"
+	fileString := fmt.Sprintf("%s%s",fileName,".txt")
 	file, err := os.Open(fileString)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -43,7 +43,7 @@ func CreateMap(fileName string) (map[rune][]string, error) {
 		return nil, err
 	}
 	// Validate the file path and checks for empty files or non-text file extensions.
-	if filepath.Ext(fileName) != ".txt" {
+	if filepath.Ext(fileString) != ".txt" {
 		fmt.Println("Wrong extension, use .txt")
 		return nil, err
 	}
