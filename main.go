@@ -10,6 +10,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", handlers.Request)
+	http.HandleFunc("/submit", handlers.Post)
 	fmt.Println("Server is starting on http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
