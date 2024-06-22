@@ -15,7 +15,7 @@ func TestReadMap(t *testing.T) {
 
 	// defer os.Remove(testFilePath)
 	expectedMap := map[rune][]string{
-		' ': {"1", "2", "3", "4", "5", "6", "7", "8"},
+		' ': {"1", "2", "3", "4", "5", "6", "7", "8", "9"},
 		'!': {"9", "10", "11", "12", "13", "14", "15", "16"},
 	}
 	resultMap, err := CreateMap(testFilePath)
