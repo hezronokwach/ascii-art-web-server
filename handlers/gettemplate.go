@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-var template *template.Template
+var temp *template.Template
 
 func init() {
 	temp1, err := template.ParseFiles("templates/index.html")
@@ -14,8 +14,8 @@ func init() {
 		fmt.Printf("error parsing the template %s", err)
 		os.Exit(1)
 	}
-	template = temp1
+	temp = temp1
 }
 func GetTemplate() *template.Template {
-	return template
+	return temp
 }
