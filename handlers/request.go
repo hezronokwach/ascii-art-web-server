@@ -3,25 +3,28 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-	"os"
 
 	//"html/template"
 	asciiart "asciiart/functionFiles"
 )
 
+const (
+	notFound            = http.StatusNotFound
+	internalServerError = http.StatusInternalServerError
+	badRequest          = http.StatusBadRequest
+	methodNotAllowed    = http.StatusMethodNotAllowed
+)
+
 func Request(writer http.ResponseWriter, reader *http.Request) {
 	temp1 := GetTemplate()
-	if reader.Method != http.MethodGet {
-		http.Error(writer, "405 Invalid request method", http.StatusMethodNotAllowed)
-		return
-	}
 	temp1.Execute(writer, Data{Success: false})
 }
 
 func Post(writer http.ResponseWriter, reader *http.Request) {
 	temp2 := GetTemplate()
 	if reader.Method != http.MethodPost {
-		http.Error(writer, "405 Invalid request method", http.StatusMethodNotAllowed)
+		msg := fmt.Sprintf("%d% s", methodNotAllowed, " Method not allowed")
+		http.Error(writer, msg, http.StatusMethodNotAllowed)
 		return
 	}
 	userInput := reader.FormValue("userinput")
@@ -29,13 +32,19 @@ func Post(writer http.ResponseWriter, reader *http.Request) {
 
 	characteMap, err := asciiart.CreateMap(banner)
 	if err != nil {
+		msg := fmt.Sprintf("%d% s", internalServerError, " Internal Server Error ")
+		http.Error(writer, msg, http.StatusInternalServerError)
 		fmt.Printf("Error creating map %s", err)
 		fmt.Println()
-		os.Exit(1)
+		return
 	}
 	result := asciiart.DisplayAsciiArt(characteMap, userInput)
-	temp2.Execute(writer, Data{Success:true, Result:result})
-	fmt.Println(userInput)
-	fmt.Println(banner)
-	
+	if result == "" {
+		msg := fmt.Sprintf("%d% s", badRequest, " Bad Request ")
+		http.Error(writer, msg, http.StatusBadRequest)
+		fmt.Printf("Character not found %s", err)
+		fmt.Println()
+		return
+	}
+	temp2.Execute(writer, Data{Success: true, Result: result})
 }
