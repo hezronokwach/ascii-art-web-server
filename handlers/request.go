@@ -16,6 +16,16 @@ const (
 )
 
 func Request(writer http.ResponseWriter, reader *http.Request) {
+	if reader.URL.Path != "/" {
+		msg := fmt.Sprintf("%d% s", notFound, " Page not found")
+		http.Error(writer, msg, http.StatusNotFound)
+		return
+	}
+	if reader.Method != http.MethodGet {
+		msg := fmt.Sprintf("%d% s", methodNotAllowed, " Method not allowed")
+		http.Error(writer, msg, http.StatusMethodNotAllowed)
+		return
+	}
 	temp1 := GetTemplate()
 	temp1.Execute(writer, Data{Success: false})
 }
