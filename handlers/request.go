@@ -56,5 +56,5 @@ func Post(writer http.ResponseWriter, reader *http.Request) {
 		fmt.Println()
 		return
 	}
-	temp2.Execute(writer, Data{Success: true, Result: result})
+	temp2.Execute(writer, Data{Success: true, Result: result, UserInput: userInput})
 }
