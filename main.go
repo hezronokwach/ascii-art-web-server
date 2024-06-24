@@ -8,7 +8,13 @@ import (
 	handlers "asciiart/handlers"
 )
 
+
 func main() {
+
+	if len(os.Args) !=1 {
+		fmt.Println("<Usage>", "<go run .>, <go run main.go>")
+		os.Exit(1)
+	}
 	http.HandleFunc("/", handlers.Request)
 	http.HandleFunc("/submit", handlers.Post)
 	fmt.Println("Server is starting on http://localhost:8080")
