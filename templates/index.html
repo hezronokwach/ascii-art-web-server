@@ -2,13 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Go lang</title>
+        <title>Ascii</title>
+        <style>
+            body{
+            text-align: center;
+            }
+        </style>
     </head>
     <body>
-        <h2 style="text-align: center;">ASCII ART</h2>
+        <h2>ASCII ART GENERATOR</h2>
         <form method="POST" action="/submit">
             <textarea  name="userinput" placeholder="Enter string" rows="10"
-                cols="40" recquired ></textarea><br>
+                cols="40" recquired >{{.UserInput}}</textarea><br>
             <select name="bannerfile">
                 <option value="standard">standard</option>
                 <option value="shadow">shadow</option>
@@ -17,7 +22,6 @@
             <button type="submit">Submit</button>
         </form>
         {{if .Success}}
-        <h1>Output</h1>
         <h3>Processed ASCII Art:</h3>
         <pre>{{.Result}}</pre>
         {{end}}
