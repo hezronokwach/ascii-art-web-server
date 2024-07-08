@@ -21,8 +21,8 @@ This Go web application serves as an ASCII art generator. Users can input text a
 
 1. Clone the repository:
    ```bash
-   git clone https://yourrepositorylink.com
-   cd your-repository-folder
+   git clone https://learn.zone01kisumu.ke/git/hokwach/ascii-art-web
+   cd ascii-art-web
    ```
 2. Run the server:
    ```bash
@@ -30,7 +30,7 @@ This Go web application serves as an ASCII art generator. Users can input text a
     ```
 3. Open a web browser and visit:
     ```bash
-   http://localhost:8080
+   http://localhost:8090
     ```
 
 ## Implementation Details
