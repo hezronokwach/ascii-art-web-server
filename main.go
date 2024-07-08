@@ -14,7 +14,7 @@ func main() {
 		os.Exit(1)
 	}
 	http.HandleFunc("/", handlers.Request)
-	http.HandleFunc("/submit", handlers.Post)
+	http.HandleFunc("/ascii-art", handlers.Post)
 	fmt.Println("Server is starting on http://localhost:8090")
 	err := http.ListenAndServe(":8090", nil)
 	if err != nil {
