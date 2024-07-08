@@ -11,7 +11,7 @@ import (
 func CreateMap(fileName string) (map[rune][]string, error) {
 	// Open and read a file specified by the given file path(s), creating an ASCII art map.
 	// Check if the file exists
-	fileString := fmt.Sprintf("%s%s",fileName,".txt")
+	fileString := fmt.Sprintf("%s%s", fileName, ".txt")
 	file, err := os.Open(fileString)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -35,7 +35,7 @@ func CreateMap(fileName string) (map[rune][]string, error) {
 	}
 	crc32Table := crc32.MakeTable(crc32.IEEE)
 	checksum := crc32.Checksum(data, crc32Table)
-	if !(checksum == 0x9ffd59bc || checksum == 0x2f465361 || checksum == 0x6ee86a07) {
+	if !(checksum == 0x9ffd59bc || checksum == 0x2f465361 || checksum == 0x6ee86a07 || checksum == 1501001935 ){
 		return nil, fmt.Errorf("file modified")
 	}
 	err = scanner.Err()
@@ -61,6 +61,5 @@ func CreateMap(fileName string) (map[rune][]string, error) {
 		}
 		characterMap[currentChar] = append(characterMap[currentChar], line)
 	}
-	// Returns the constructed map or an error if any occurs during file operations or map creation.
 	return characterMap, nil
 }
