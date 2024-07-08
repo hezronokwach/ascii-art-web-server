@@ -12,14 +12,10 @@ DisplayAsciiArt generates ASCII art from a given character map and input string.
 3. Returns the complete ASCII art or an empty string if any character is not found.
 */
 func DisplayAsciiArt(characterMap map[rune][]string, input string) string {
-	inputRaw := strings.Replace(input, "\r\n", "\\n", -1)
-	inputSlice := strings.Split(inputRaw, "\\n")
+	inputRaw := strings.Replace(input, "\r\n", "\n", -1)
+	inputSlice := strings.Split(inputRaw, "\n")
 	var result strings.Builder
 	for _, value := range inputSlice {
-		if value == "" {
-			result.WriteString("\n") 
-			continue
-		}
 		for i := 0; i < 8; i++ {
 			for _, char := range value {
 				line, ok := characterMap[char]
