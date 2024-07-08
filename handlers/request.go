@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+
 	asciiart "asciiart/functionFiles"
 )
 
@@ -28,6 +29,7 @@ func Request(writer http.ResponseWriter, reader *http.Request) {
 	}
 	temp := GetTemplate()
 	temp.Execute(writer, Data{Success: false})
+	fmt.Println("GET / - 200 OK") // Log success in the terminal
 }
 
 func Post(writer http.ResponseWriter, reader *http.Request) {
@@ -55,4 +57,5 @@ func Post(writer http.ResponseWriter, reader *http.Request) {
 
 	temp := GetTemplate()
 	temp.Execute(writer, Data{Success: true, Result: result, UserInput: userInput})
+	fmt.Println("POST /submit - 200 OK ") // Log success with input data
 }
