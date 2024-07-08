@@ -1,193 +1,93 @@
-# ascii-art
+# ASCII Art Web Server
+![](https://www.parallels.com/blogs/ras/app/uploads/2022/02/Best-Practices-for-Server-Performance-Monitoring.jpg)
+
+## Description
+
+This Go web application serves as an ASCII art generator. Users can input text and select a banner style, then the server processes this input to generate ASCII art. The application is built with the Go programming language and uses HTML templates for rendering web pages.
 
 ## Authors
-- [mdudi](https://github.com/Dudimath)
-- [hokwach](https://github.com/hezronokwach)
-- shfana
 
-
-Ascii-art is a program written in Go that takes a string as an argument and outputs the string in a graphical representation using ASCII characters.
-
-## Graphic Representation Using ASCII
-
-A graphic representation using ASCII means representing the input string using ASCII characters. Here's an example:
-```bash
-@@@@@@BB@@@@``^^``^^``@@BB$$@@BB$$
-@@%%$$$$^^^^WW&&8888&&^^""BBBB@@@@
-@@@@@@""WW8888&&WW888888WW``@@@@$$
-BB$$``&&&&WWWW8888&&&&8888&&``@@@@
-$$``&&WW88&&88&&&&8888&&88WW88``$$
-@@""&&&&&&&&88888888&&&&&&88&&``$$
-``````^^``^^^^^^````""^^``^^``^^``
-""WW^^@@@@^^``````^^BB@@^^``^^&&``
-^^&&^^@@````^^``&&``@@````^^^^&&``
-``WW&&^^""``^^WW&&&&""``^^^^&&88``
-^^8888&&&&&&WW88&&88WW&&&&88&&WW``
-@@``&&88888888WW&&WW88&&88WW88^^$$
-@@""88&&&&&&&&888888&&``^^&&88``$$
-@@@@^^&&&&&&""``^^^^^^8888&&^^@@@@
-@@@@@@^^888888&&88&&&&MM88^^BB$$$$
-@@@@@@BB````&&&&&&&&88""``BB@@BB$$
-$$@@$$$$$$$$``````````@@$$@@$$$$$$
-```
-This project can handle inputs with numbers, letters, spaces, special characters, and `\n`.
-
-## Instructions
-
-- The project must be written in Go.
-- The code must follow good practices.
-- Unit test files are recommended.
-- Three banner files with specific graphical templates represented using ASCII are provided:
-  - [`shadow`](https://learn.zone01kisumu.ke/git/root/public/src/branch/master/subjects/ascii-art/shadow.txt)
-  - [`standard`](https://learn.zone01kisumu.ke/git/root/public/src/branch/master/subjects/ascii-art/standard.txt)
-  - [`thinkertoy`](https://learn.zone01kisumu.ke/git/root/public/src/branch/master/subjects/ascii-art/thinkertoy.txt)
-
-## Banner Format
-
-- Each character has a height of 8 lines.
-- Characters are separated by a new line `\n`.
-## Funtionality
-### [`CreateMap`](https://learn.zone01kisumu.ke/git/mdudi/ascii-art/src/branch/master/functionFiles/createmap.go)
-
-Reads ASCII art from a file specified by filename.
-Returns a 2D slice representing the ASCII art.
-
-### [`DisplayArt`](https://learn.zone01kisumu.ke/git/mdudi/ascii-art/src/branch/master/functionFiles/displaymap.go)
-
-Prints a string using ASCII art, where words are separated by spaces and lines are separated by \n.
-Uses PrintWord to print individual words.
-Returns an error if encountered during printing.
-
-### [`IsPrintable`](https://learn.zone01kisumu.ke/git/mdudi/ascii-art/src/branch/master/functionFiles/isprintable.go)
-
-This Go function, IsPrintable, determines whether a given string contains printable ASCII characters, accounting for escape sequences such as `\t, \a, \b, \v, \f, and \r.`
-
-### [`main()`](https://github.com/Dudimath/ascii_art/blob/main/programme/main.go)
-Parses command-line flags -shadow and -thinkertoy to determine which ASCII art file to use.
-Prints the ASCII art based on the input string and chosen ASCII art file.
-This code uses command-line flags to select different ASCII art files (shadow.txt, thinkertoy.txt, or standard.txt) and prints the input string using ASCII art.
-
+- [Hezron Okwach](https://github.com/hezronokwach) 
+- [Anne Maina](https://github.com/nyagooh)
+- [Brain Bantu]()
 ## Usage
 
-To run the program, use the following commands:
+### Requirements
 
-```bash
-go run . "" | cat -e
-go run . "\n" | cat -e
-go run . "Hello\n" | cat -e
-go run . "hello" | cat -e
-go run . "HeLlO" | cat -e
-go run . "Hello There" | cat -e
-go run . "1Hello 2There" | cat -e
-go run . "{Hello There}" | cat -e
-go run . "Hello\nThere" | cat -e
-go run . "Hello\n\nThere" | cat -e
-```
-## Flags
-- `shadow`: Use shadow.txt for ASCII art.
-- `thinkertoy`: Use thinkertoy.txt for ASCII art.
-```bash
-go run . "Hello" -shadow
-go run . "Hello" -thinkertoy
-```
-## Output Examples
-### - Standard Text File
-```bash
-$ go run . "mdudi\nhokwach\nshfana" | cat -e
-                 _               _   _  $
-                | |             | | (_) $
- _ __ ___     __| |  _   _    __| |  _  $
-| '_ ` _ \   / _` | | | | |  / _` | | | $
-| | | | | | | (_| | | |_| | | (_| | | | $
-|_| |_| |_|  \__,_|  \__,_|  \__,_| |_| $
-                                        $
-                                        $
- _                                                _      $
-| |              _                               | |     $
-| |__     ___   | | _  __      __   __ _    ___  | |__   $
-|  _ \   / _ \  | |/ / \ \ /\ / /  / _` |  / __| |  _ \  $
-| | | | | (_) | |   <   \ V  V /  | (_| | | (__  | | | | $
-|_| |_|  \___/  |_|\_\   \_/\_/    \__,_|  \___| |_| |_| $
-                                                         $
-                                                         $
-       _        __                          $
-      | |      / _|                         $
- ___  | |__   | |_    __ _   _ __     __ _  $
-/ __| |  _ \  |  _|  / _` | | '_ \   / _` | $
-\__ \ | | | | | |   | (_| | | | | | | (_| | $
-|___/ |_| |_| |_|    \__,_| |_| |_|  \__,_| $
-                                            $
-                                            $
-```
-### - Shadow Text File
+- Go (version 1.15 or higher recommended)
+- Access to a terminal or command prompt
 
-```bash
-$ go run . "mdudi\nshfana" -shadow | cat -e
-                                             $
-                     _|                _| _| $
-_|_|_|  _|_|     _|_|_| _|    _|   _|_|_|    $
-_|    _|    _| _|    _| _|    _| _|    _| _| $
-_|    _|    _| _|    _| _|    _| _|    _| _| $
-_|    _|    _|   _|_|_|   _|_|_|   _|_|_| _| $
-                                             $
-                                             $
-                                                      $
-         _|           _|_|                            $
-  _|_|_| _|_|_|     _|       _|_|_| _|_|_|     _|_|_| $
-_|_|     _|    _| _|_|_|_| _|    _| _|    _| _|    _| $
-    _|_| _|    _|   _|     _|    _| _|    _| _|    _| $
-_|_|_|   _|    _|   _|       _|_|_| _|    _|   _|_|_| $
-                                                      $
-                                                      $
-```
-### -Thinkertoy Text File
+### Running the Application
 
-```bash
-$ go run . "mdudi\nshfana\nokwach" -thinkertoy | cat -e
-                       $
-         o         o   $
-         |         | o $
-o-O-o  o-O o  o  o-O   $
-| | | |  | |  | |  | | $
-o o o  o-o o--o  o-o | $
-                       $
-                       $
-                             $
-    o     o-o                $
-    |     |                  $
-o-o O--o -O-   oo  o-o   oo  $
- \  |  |  |   | |  |  | | |  $
-o-o o  o  o   o-o- o  o o-o- $
-                             $
-                             $
-                                  $
-    o                        o    $
-    | /                      |    $
-o-o OO   o   o   o  oo   o-o O--o $
-| | | \   \ / \ /  | |  |    |  | $
-o-o o  o   o   o   o-o-  o-o o  o $
-                                  $
-                                  $
-```
-                                                             
-## Conclusion
-This project helps you learn about:
+1. Clone the repository:
+   ```bash
+   git clone https://yourrepositorylink.com
+   cd your-repository-folder
+   ```
+2. Run the server:
+   ```bash
+    go run .  
+    ```
+3. Open a web browser and visit:
+    ```bash
+   http://localhost:8080
+    ```
 
-- Go file system (fs) API.
-- Data manipulation.
+## Implementation Details
 
-If you encounter any issues or have suggestions for improvement, feel free to submit an issue or propose a change!
+### Endpoints
 
-To get started working on the ASCII Art project, follow these steps:
+  GET /: Serves the main page where users can input text and choose a banner style.
 
-Clone the Repository: First, clone the repository to your local machine using Git. You can do this by running the following command in your terminal:
-bash
-```bash
-git clone https://learn.zone01kisumu.ke/git/mdudi/ascii-art.git
-```
-Navigate to the Project Directory: Move into the project directory using the cd command:
+  POST /submit: Receives data from the form on the main page (text and a selected banner), generates ASCII art based on the input, and returns the result on the page.
 
-```bash
-cd ascii-art
-```
-Then you start ,making changes 🏃‍♂️🏃‍♂️🏃‍♂️
+### Features
+
+   Text Input: Users can enter the text they want to convert to ASCII art.
+    Banner Selection: Users can select the desired ASCII art style via radio buttons or a select dropdown.
+
+   Dynamic Results Display: The results of the ASCII art generation are displayed on the main page after the POST request, without needing to navigate to a new page.
+
+  ### Algorithm
+
+The ASCII art generation algorithm involves several key steps, from receiving user input to processing it into ASCII art. Here’s a detailed breakdown:
+
+1. **Receiving User Input**:
+   - The main page (`GET /`) presents users with an HTML form where they can enter the text they wish to transform and select a banner style (e.g., standard, shadow, or thinkertoy).
+   - Users submit their input and selected banner via a `POST` request to `/submit`.
+
+2. **Form Validation**:
+   - When the server receives the `POST` request, it first validates the input to ensure that the text is not empty and that the selected banner is one of the predefined options.
+   - If the validation fails, the server responds with a `400 Bad Request` status code, and the user is prompted to correct their input.
+
+3. **Processing the Input**:
+   - If the input passes validation, the server uses the selected banner style to retrieve a corresponding character map. Each banner style has a different set of character designs for representing text.
+   - The server processes each character of the input text through the chosen banner's character map, converting it to a stylized ASCII representation.
+
+4. **Generating ASCII Art**:
+   - The processed characters are then assembled into full lines of ASCII art, maintaining the appropriate spacing and line breaks based on the dimensions of the banner characters.
+   - This step involves looping through each line of text input and each character, applying the character map, and concatenating the results into complete lines of ASCII art.
+
+5. **Displaying the Result**:
+   - After processing, the generated ASCII art is embedded into the response HTML using Go templates.
+   - The ASCII art is displayed on the same main page `/submit` page.
+6. **Error Handling**:
+   - Throughout the process, the server checks for potential errors, such as file access errors (if character maps are stored in files) or rendering issues.
+   - Any internal server errors trigger a `500 Internal Server Error` response, with appropriate logging for debugging purposes.
+
+### HTTP Status Codes
+
+- `200 OK`: Returned when pages and POST requests are processed successfully.
+- `404 Not Found`: Returned when a requested resource (e.g., a non-existent template or banner) is not found.
+- `400 Bad Request`: Returned when the client sends an incorrect request.
+- `500 Internal Server Error`: Returned when the server encounters an error that it cannot handle.
+
+### Technologies Used
+
+- **Go**: Primary programming language for server-side logic.
+- **HTML Templates**: Used for rendering the user interface.
+- **Net/HTTP Package**: Used for handling HTTP requests and responses.
+
+## Contributing
+
+Contributions to this project are welcome. Please fork the repository and submit a pull request with your changes.
