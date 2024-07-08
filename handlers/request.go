@@ -38,9 +38,8 @@ func Post(writer http.ResponseWriter, reader *http.Request) {
 		return
 	}
 
-	userInput := reader.FormValue("userinput")
-	banner := reader.FormValue("bannerfile")
-
+	userInput := reader.FormValue("text")
+	banner := reader.FormValue("banner")
 	characterMap, err := asciiart.CreateMap(banner)
 	if err != nil {
 		handleError(writer, internalServerError, "Internal Server Error")
@@ -57,5 +56,5 @@ func Post(writer http.ResponseWriter, reader *http.Request) {
 
 	temp := GetTemplate()
 	temp.Execute(writer, Data{Success: true, Result: result, UserInput: userInput})
-	fmt.Println("POST /submit - 200 OK ") // Log success with input data
+	fmt.Println("POST /ascii-art - 200 OK ") // Log success with input data
 }
