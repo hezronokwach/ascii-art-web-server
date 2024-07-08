@@ -3,58 +3,56 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-
-	//"html/template"
 	asciiart "asciiart/functionFiles"
 )
 
 const (
 	notFound            = http.StatusNotFound
 	internalServerError = http.StatusInternalServerError
-	badRequest          = http.StatusBadRequest
 	methodNotAllowed    = http.StatusMethodNotAllowed
+	badRequest          = http.StatusBadRequest
 )
+
+func handleError(writer http.ResponseWriter, statusCode int, message string) {
+	http.Error(writer, fmt.Sprintf("%d %s", statusCode, message), statusCode)
+}
 
 func Request(writer http.ResponseWriter, reader *http.Request) {
 	if reader.URL.Path != "/" {
-		msg := fmt.Sprintf("%d% s", notFound, " Page not found")
-		http.Error(writer, msg, http.StatusNotFound)
+		handleError(writer, notFound, "Page not found")
 		return
 	}
 	if reader.Method != http.MethodGet {
-		msg := fmt.Sprintf("%d% s", methodNotAllowed, " Method not allowed")
-		http.Error(writer, msg, http.StatusMethodNotAllowed)
+		handleError(writer, methodNotAllowed, "Method not allowed")
 		return
 	}
-	temp1 := GetTemplate()
-	temp1.Execute(writer, Data{Success: false})
+	temp := GetTemplate()
+	temp.Execute(writer, Data{Success: false})
 }
 
 func Post(writer http.ResponseWriter, reader *http.Request) {
-	temp2 := GetTemplate()
 	if reader.Method != http.MethodPost {
-		msg := fmt.Sprintf("%d% s", methodNotAllowed, " Method not allowed")
-		http.Error(writer, msg, http.StatusMethodNotAllowed)
+		handleError(writer, methodNotAllowed, "Method not allowed")
 		return
 	}
+
 	userInput := reader.FormValue("userinput")
 	banner := reader.FormValue("bannerfile")
 
-	characteMap, err := asciiart.CreateMap(banner)
+	characterMap, err := asciiart.CreateMap(banner)
 	if err != nil {
-		msg := fmt.Sprintf("%d% s", internalServerError, " Internal Server Error ")
-		http.Error(writer, msg, http.StatusInternalServerError)
-		fmt.Printf("Error creating map %s", err)
-		fmt.Println()
+		handleError(writer, internalServerError, "Internal Server Error")
+		fmt.Printf("Error creating map: %s\n", err)
 		return
 	}
-	result := asciiart.DisplayAsciiArt(characteMap, userInput)
+
+	result := asciiart.DisplayAsciiArt(characterMap, userInput)
 	if result == "" {
-		msg := fmt.Sprintf("%d% s", badRequest, " Bad Request ")
-		http.Error(writer, msg, http.StatusBadRequest)
-		fmt.Printf("Character not found %s", err)
-		fmt.Println()
+		handleError(writer, badRequest, "Bad Request")
+		fmt.Println("Character not found")
 		return
 	}
-	temp2.Execute(writer, Data{Success: true, Result: result, UserInput: userInput})
+
+	temp := GetTemplate()
+	temp.Execute(writer, Data{Success: true, Result: result, UserInput: userInput})
 }
