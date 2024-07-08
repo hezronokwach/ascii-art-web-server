@@ -9,7 +9,7 @@ This Go web application serves as an ASCII art generator. Users can input text a
 
 - [Hezron Okwach](https://github.com/hezronokwach) 
 - [Anne Maina](https://github.com/nyagooh)
-- [Brain Bantu](https://learn.zone01kisumu.ke/git/bbantu)
+- [Brian Bantu](https://github.com/Bantu-art)
 ## Usage
 
 ### Requirements
