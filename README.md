@@ -6,7 +6,6 @@
 This Go web application serves as an ASCII art generator. Users can input text and select a banner style, then the server processes this input to generate ASCII art. The application is built with the Go programming language and uses HTML templates for rendering web pages.
 
 ## Authors
-
 - [Hezron Okwach](https://github.com/hezronokwach) 
 - [Anne Maina](https://github.com/nyagooh)
 - [Brian Bantu](https://github.com/Bantu-art)
@@ -43,8 +42,8 @@ This Go web application serves as an ASCII art generator. Users can input text a
 
 ### Features
 
-   Text Input: Users can enter the text they want to convert to ASCII art.
-    Banner Selection: Users can select the desired ASCII art style via radio buttons or a select dropdown.
+   Text Input: Users can enter the text they want to convert to ASCII art. The text must be ascii characters otherwise they will encounter bad request error message.
+    Banner Selection: Users can select the desired ASCII art style via a select dropdown i.e standard, shadow, thinkertoy.
 
    Dynamic Results Display: The results of the ASCII art generation are displayed on the main page after the POST request, without needing to navigate to a new page.
 
